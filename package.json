@@ -1,0 +1,23 @@
+{
+  "name": "reportbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gsamant/ReportBot.git"
+  },
+  "author": "Gandhali Samant",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gsamant/ReportBot/issues"
+  },
+  "homepage": "https://github.com/gsamant/ReportBot#readme",
+  "dependencies": {
+    "botbuilder": "^1.0.1",
+    "restify": "^4.1.1"
+  }
+}
