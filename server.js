@@ -12,7 +12,8 @@ bot.add('/', dialog);
 dialog.on('ShowReportTypes', [
     function (session, args) {
        
-        builder.Prompts.text(session, "You can generate the following reports : 1,2,3"); //values to be read from JSON and shown
+        // builder.Message.text(session, "You can generate the following reports : 1,2,3"); //values to be read from JSON and shown
+        session.send("You can generate the following reports : 1,2,3");
        
     }
 ]);
@@ -20,8 +21,9 @@ dialog.on('ShowReportTypes', [
 dialog.on('Greeting', [
     function (session, args) {
        
-        builder.Prompts.text(session, "Hello There! How may I help you, I can help you in viewing available report types, and in requesting generation or particular reports"); //values to be read from JSON and shown
-       
+        // builder.Prompts.text(session, "Hello There! How may I help you, I can help you in viewing available report types, and in requesting generation or particular reports"); //values to be read from JSON and shown
+        // builder.Message.text(session, "Hello There! How may I help you, I can help you in viewing available report types, and in requesting generation or particular reports");
+       session.send("Hello There! How may I help you, I can help you in viewing available report types, and in requesting generation or particular reports");
     }
 ]);
 
@@ -30,10 +32,13 @@ dialog.on('GenerateReport', [
        
         var reportType = builder.EntityRecognizer.findEntity(args.entities, 'ReportType');
         if (!reportType) {
-            builder.Prompts.text(session, "Could not Identify which report you want to generate");
+            // builder.Message.text(session, "Could not Identify which report you want to generate");
+            session.send("Could not Identify which report you want to generate");
+            
         } else {
             // next({ response: task.entity });
-            builder.Prompts.text(session, "Do you want to generate the " + reportType.entity + " report");
+            // builder.Message.text(session, "Do you want to generate the " + reportType.entity + " report");
+            session.send("Do you want to generate the " + reportType.entity + " report");
         }
         
        
