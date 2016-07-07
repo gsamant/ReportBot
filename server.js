@@ -3,9 +3,7 @@ var builder = require('botbuilder');
 
 // Create bot and add dialogs
 var bot = new builder.BotConnectorBot({ appId: process.env.APP_ID, appSecret: process.env.APP_SECRET });
-// bot.add('/', function (session) {
-//     session.send('Hello World');
-// });
+
 bot.add('/', function (session) {
     console.log(session);
     if (!session.userData.name) {
