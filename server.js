@@ -39,7 +39,7 @@ server.post('/api/messages', connector.listen());
 var dialog = new builder.LuisDialog(process.env.LUIS_URL    );
 bot.dialog('/', dialog);
 
-bot.on('conversationUpdate', function (message) {
+bot.on('typing', function (message) {
    // Check for group conversations
  console.log(message);
 });
