@@ -45,7 +45,7 @@ dialog.on('GenerateReport', [
     }
 ]);
 
-dialog.onDefault(builder.DialogAction.send("I'm sorry. You can generate the following reports : 1,2,3"));
+dialog.onDefault(builder.DialogAction.send("I'm sorry. You can generate the following reports : 1- Profile Report, 2-Trend Report"));
 
 var server = restify.createServer();
 server.post('/api/messages', bot.verifyBotFramework(), bot.listen());
