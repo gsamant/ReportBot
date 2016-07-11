@@ -3,7 +3,7 @@ var builder = require('botbuilder');
 
 
 // Create bot and add dialogs
-var bot = new builder.BotConnectorBot({ appId: process.env.APP_ID, appSecret: process.env.APP_SECRET });
+var bot = new builder.BotConnectorBot({ appId: process.env.APP_ID, appPassword: process.env.APP_SECRET });
 
 
 var dialog = new builder.LuisDialog(process.env.LUIS_URL    );
