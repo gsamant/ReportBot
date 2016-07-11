@@ -62,7 +62,8 @@ dialog.on('GenerateReport', [
     function (session, args) {
        
         var reportType = builder.EntityRecognizer.findEntity(args.entities, 'ReportType');
-        console.log(session.userData.name);
+        console.log("Sesion User Data : " + session.userData.name);
+        console.log("Session contents : " + session);
         if (!reportType) {
             // builder.Message.text(session, "Could not Identify which report you want to generate");
             session.send("Could not Identify which report you want to generate");
