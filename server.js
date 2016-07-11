@@ -6,14 +6,14 @@ var builder = require('botbuilder');
 var bot = new builder.BotConnectorBot({ appId: process.env.APP_ID, appSecret: process.env.APP_SECRET });
 
 
-var dialog = new builder.LuisDialog(process.env.LUIS_URL    );
+var dialog = new builder.LuisDialog(process.env.LUIS_URL);
 bot.add('/', dialog);
 
 dialog.on('ShowReportTypes', [
     function (session, args) {
        
         // builder.Message.text(session, "You can generate the following reports : 1,2,3"); //values to be read from JSON and shown
-        session.send("You can generate the following reports : 1,2,3");
+        session.send("You can generate the following reports : 1- Profile Report, 2-Trend Report");
        
     }
 ]);
@@ -45,7 +45,7 @@ dialog.on('GenerateReport', [
     }
 ]);
 
-dialog.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."));
+dialog.onDefault(builder.DialogAction.send("I'm sorry. You can generate the following reports : 1,2,3"));
 
 var server = restify.createServer();
 server.post('/api/messages', bot.verifyBotFramework(), bot.listen());
