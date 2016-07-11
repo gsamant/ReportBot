@@ -67,9 +67,9 @@ dialog.on('GenerateReport', [
     function (session, args) {
        
         var reportType = builder.EntityRecognizer.findEntity(args.entities, 'ReportType');
-        console.log(" Session : " + String(session) );
+        console.log(" Session : " + String(session.message) );
         console.log("Session message type : " + session.message.type);
-        // console.log("stringified session : " + JSON.stringify(session));
+        console.log("session strigified: " + JSON.stringify(session.message));
         console.log("Sesion User Data : " + session.userData.name);
         console.log("Session from : " + session.message.from);
         console.log("Session to : " + session.message.to);
