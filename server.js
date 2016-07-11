@@ -42,6 +42,7 @@ bot.dialog('/', dialog);
 dialog.on('ShowReportTypes', [
     function (session, args) {
        
+       
         // builder.Message.text(session, "You can generate the following reports : 1,2,3"); //values to be read from JSON and shown
         session.send("You can generate the following reports : 1,2,3");
        
@@ -61,6 +62,7 @@ dialog.on('GenerateReport', [
     function (session, args) {
        
         var reportType = builder.EntityRecognizer.findEntity(args.entities, 'ReportType');
+        console.log(session.userData.name);
         if (!reportType) {
             // builder.Message.text(session, "Could not Identify which report you want to generate");
             session.send("Could not Identify which report you want to generate");
