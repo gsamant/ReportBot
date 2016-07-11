@@ -68,7 +68,12 @@ dialog.on('GenerateReport', [
        
         var reportType = builder.EntityRecognizer.findEntity(args.entities, 'ReportType');
         console.log("Sesion User Data : " + session.userData.name);
-        console.log("Session contents : " + session);
+        console.log("Session from : " + session.message.from);
+        console.log("Session to : " + session.message.to);
+        console.log("Session conversationId : " + session.message.conversationId);
+        console.log("Session channelMessageId : " + session.message.channelMessageId);
+        console.log("Session channelConversationId : " +session.message.channelConversationId);
+        
         if (!reportType) {
             // builder.Message.text(session, "Could not Identify which report you want to generate");
             session.send("Could not Identify which report you want to generate");
