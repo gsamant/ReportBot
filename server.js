@@ -40,10 +40,34 @@ dialog.on('GenerateReport', [
             // builder.Message.text(session, "Do you want to generate the " + reportType.entity + " report");
             session.send("Do you want to generate the " + reportType.entity + " report");
         }
-        
-       
     }
 ]);
+
+dialog.matches('yes', [ 
+     function (session, args, next) { 
+          session.send("Here is your report");
+     } 
+]); 
+
+
+bot.dialog('ConfirmReport', [
+    function (session, args) {
+       
+        var reportType = builder.EntityRecognizer.findEntity(args.entities, 'ReportType');
+        if (!reportType) {
+            // builder.Message.text(session, "Could not Identify which report you want to generate");
+            session.send("Could not Identify which report you want to generate");
+            
+        } else {
+            // next({ response: task.entity });
+            // builder.Message.text(session, "Do you want to generate the " + reportType.entity + " report");
+            session.send("Do you want to generate the " + reportType.entity + " report");
+            session.beginDialog('/confirmReport', reportType.entity);
+        }
+    }
+]);
+
+
 
 dialog.onDefault(builder.DialogAction.send("I'm sorry. You can generate the following reports : 1- Profile Report, 2-Trend Report"));
 
