@@ -89,7 +89,7 @@ dialog.on('GenerateReport', [
         }
 
         if (reportParams.reportType && reportParams.openCount && reportParams.sentCount && reportParams.subjectLine) {
-            builder.Prompts.text(session,"Creating "+reportParams.reportType+" report with Sent Count-"+reportParams.reportType+", Open Count-"+reportParams.reportType+" and Subject Line-"+reportParams.reportType);
+            builder.Prompts.text(session,"Creating "+reportParams.reportType+" report with Sent Count-"+reportParams.sentCount+", Open Count-"+reportParams.openCount+" and Subject Line-"+reportParams.subjectLine);
         }
         else{
             next();
