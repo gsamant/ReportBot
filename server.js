@@ -26,8 +26,9 @@ var recognizer = new builder.LuisRecognizer(model);
 var dialog = new builder.IntentDialog({ recognizers: [recognizer] }); 
 bot.dialog('/', dialog);
 console.log("Diaglog value is :" + dialog);
+console.log("Dialog strigified: " + JSON.stringify(dialog));
 
-
+dialog.matches(/^hi/i, builder.DialogAction.send('Bot version 3'));
 
 dialog.matches('ShowReportTypes', [
     function (session) {
