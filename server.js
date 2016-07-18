@@ -14,13 +14,19 @@ var connector = new builder.ChatConnector({
     appPassword: process.env.APP_SECRET
 });
 
-
+// Setup Restify Server
+var server = restify.createServer();
+server.post('/api/messages', connector.listen());
+server.listen(process.env.port || 3978, function () {
+    console.log('%s listening to %s', server.name, server.url);
+});
 
 var model = process.env.LUIS_URL  
 var recognizer = new builder.LuisRecognizer(model); 
 var dialog = new builder.IntentDialog({ recognizers: [recognizer] }); 
 bot.dialog('/', dialog);
 // console.log("Diaglog value is :" + dialog);
+
 
 
 dialog.matches('ShowReportTypes', [
@@ -64,9 +70,3 @@ dialog.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."));
  
  
 
-// Setup Restify Server
-var server = restify.createServer();
-server.post('/api/messages', connector.listen());
-server.listen(process.env.port || 3978, function () {
-    console.log('%s listening to %s', server.name, server.url);
-});
