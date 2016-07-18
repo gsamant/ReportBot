@@ -20,6 +20,8 @@ var model = process.env.LUIS_URL
 var recognizer = new builder.LuisRecognizer(model); 
 var dialog = new builder.IntentDialog({ recognizers: [recognizer] }); 
 bot.dialog('/', dialog);
+// console.log("Diaglog value is :" + dialog);
+
 
 dialog.matches('ShowReportTypes', [
     function (session, args) {
@@ -56,6 +58,7 @@ dialog.matches('GenerateReport', [
        
     }
 ]);
+
 
 dialog.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."));
  
