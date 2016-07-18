@@ -25,7 +25,7 @@ var model = process.env.LUIS_URL
 var recognizer = new builder.LuisRecognizer(model); 
 var dialog = new builder.IntentDialog({ recognizers: [recognizer] }); 
 bot.dialog('/', dialog);
-// console.log("Diaglog value is :" + dialog);
+console.log("Diaglog value is :" + dialog);
 
 
 
@@ -33,6 +33,7 @@ dialog.matches('ShowReportTypes', [
     function (session, args) {
        
         // builder.Message.text(session, "You can generate the following reports : 1,2,3"); //values to be read from JSON and shown
+        console.log("You can generate the following reports : 1,2,3 :");
         session.send("You can generate the following reports : 1,2,3");
        
     }
@@ -43,6 +44,7 @@ dialog.matches('Greeting', [
        
         // builder.Prompts.text(session, "Hello There! How may I help you, I can help you in viewing available report types, and in requesting generation or particular reports"); //values to be read from JSON and shown
         // builder.Message.text(session, "Hello There! How may I help you, I can help you in viewing available report types, and in requesting generation or particular reports");
+        console.log("Hello There! How may I help you");
        session.send("Hello There! How may I help you, I can help you in viewing available report types, and in requesting generation or particular reports");
     }
 ]);
