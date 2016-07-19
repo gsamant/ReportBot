@@ -43,7 +43,7 @@ dialog.matches('Greeting', [
 
 dialog.matches('WhatToSell', [
    
-    function (session) {
+    function (session,args,next) {
         
         session.send("You want to find what you can sell :");
         session.userData.location = builder.EntityRecognizer.findEntity(args.entities, 'Location');
