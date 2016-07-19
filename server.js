@@ -31,10 +31,11 @@ console.log("LUIS URL :" + process.env.LUIS_URL);
 var recognizer = new builder.LuisRecognizer(model);
 var dialog = new builder.IntentDialog({ recognizers: [recognizer] });
 bot.dialog('/', dialog);
+// dialog.re
 
 dialog.matches('Greeting', [
     function (session) {
-        session.send('Hello Greeting');
+        session.send(process.env.GREETING_MESSAGE);
     }
     // function (session, args) {
        
