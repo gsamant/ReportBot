@@ -26,6 +26,7 @@ server.listen(process.env.port || 3978, function () {
 
 // Create LUIS recognizer that points at our model and add it as the root '/' dialog for our Cortana Bot.
 var model = process.env.LUIS_URL;
+console.log("LUIS URL :" + process.env.LUIS_URL);
 var recognizer = new builder.LuisRecognizer(model);
 var dialog = new builder.IntentDialog({ recognizers: [recognizer] });
 bot.dialog('/', dialog);
