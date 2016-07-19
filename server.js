@@ -37,15 +37,42 @@ dialog.matches('Greeting', [
     function (session) {
         session.send(process.env.GREETING_MESSAGE);
     }
-    // function (session, args) {
-       
-    //     // builder.Prompts.text(session, "Hello There! How may I help you, I can help you in viewing available report types, and in requesting generation or particular reports"); //values to be read from JSON and shown
-    //     // builder.Message.text(session, "Hello There! How may I help you, I can help you in viewing available report types, and in requesting generation or particular reports");
-    //     console.log("Hello There! How may I help you");
-    //    session.send("Hello There! How may I help you, I can help you in viewing available report types, and in requesting generation or particular reports");
-    // }
+    
 ]);
 
+
+dialog.matches('WhatToSell', [
+   
+    function (session) {
+        
+        session.send("You want to find what you can sell :");
+        session.userData.location = builder.EntityRecognizer.findEntity(args.entities, 'Location');
+        session.userData.timeRange = builder.EntityRecognizer.findEntity(args.entities, 'Time Range');
+        session.userData.product = builder.EntityRecognizer.findEntity(args.entities, 'Product');
+        if(!session.userData.location)
+        {
+          builder.Prompts.choice(session, "Please select the location", ["Mumbai", "Pune","Maharashtra","India"]);
+          session.userData.location = results.response.entity;
+        }
+        if(!session.userData.timeRange)
+        {
+          builder.Prompts.choice(session, "Please select the time range", ["yesterday", "this week","last week","last month"]);
+          session.userData.timeRange = results.response.entity;
+        }
+        if(!session.userData.product)
+        {
+          builder.Prompts.text(session, "Please select the time range");
+          session.userData.product = results.response;
+        }
+    },
+    function (session, results) {
+        if(session.userData.location && session.userData.timeRange && session.userData.product)
+        session.send("You want to generate the What to Sell report for Product : " + session.userData.product + 
+                     " Location : " + session.userData.location + 
+                     " Time Range : " + session.userData.timeRangee );
+    }
+    
+]);
 
 
 dialog.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."));
