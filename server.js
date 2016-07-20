@@ -99,7 +99,7 @@ dialog.matches('WhatToSell', [
        
     },
     
-    function (session, results) {
+    function (session) {
 
         if(session.dialogData.location && session.dialogData.timeRange && session.dialogData.product)
         {
