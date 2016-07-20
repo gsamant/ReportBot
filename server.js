@@ -47,9 +47,9 @@ dialog.matches('WhatToSell', [
         console.log("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'Product').entity);
         session.send("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'Product').entity);
         session.send("You want to find what you can sell :");
-        session.userData.location = builder.EntityRecognizer.findEntity(args.entities, 'Location');
-        session.userData.timeRange = builder.EntityRecognizer.findEntity(args.entities, 'Time Range');
-        session.userData.product = builder.EntityRecognizer.findEntity(args.entities, 'Product');
+        session.userData.location = builder.EntityRecognizer.findEntity(args.entities, 'Location').entity;
+        session.userData.timeRange = builder.EntityRecognizer.findEntity(args.entities, 'Time Range').entity;
+        session.userData.product = builder.EntityRecognizer.findEntity(args.entities, 'Product').entity;
         if(!session.userData.location)
         {
           builder.Prompts.choice(session, "Please select the location", ["Mumbai", "Pune","Maharashtra","India"]);
