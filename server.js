@@ -52,39 +52,53 @@ dialog.matches('WhatToSell', [
         session.send("You want to find what you can sell :");
         if(builder.EntityRecognizer.findEntity(args.entities, 'Location'))
         {
-            session.send("Setting Location");
+            // session.send("Setting Location");
        session.dialogData.location = builder.EntityRecognizer.findEntity(args.entities, 'Location').entity;
+    //    session.send("Setting Location");
         }
         if(builder.EntityRecognizer.findEntity(args.entities, 'TimeRange'))
         {
-                  session.send("Setting TimeRange");
+                //   session.send("Setting TimeRange");
        session.dialogData.timeRange = builder.EntityRecognizer.findEntity(args.entities, 'TimeRange').entity;
         }
         if(builder.EntityRecognizer.findEntity(args.entities, 'Product'))
         {
-                  session.send("Setting Product");
+                //   session.send("Setting Product");
        session.dialogData.product = builder.EntityRecognizer.findEntity(args.entities, 'Product').entity;
         }
-    
+
+    next();
     //    session.send("Builder location : " + location);
     //    session.send("Builder timerange : " + timeRange);
     //    session.send("Builder product: " + product);
-        if(!session.dialogData.location)
-        {
-          builder.Prompts.choice(session, "Please select the location", ["Mumbai", "Pune","Maharashtra","India"]);
+        // if(!session.dialogData.location)
+        // {
+        //   builder.Prompts.choice(session, "Please select the location", ["Mumbai", "Pune","Maharashtra","India"]);
           
-        }
-        if(results.response)
-        {
-          var location = session.dialogData.location = results.response.entity;
-        }
-        session.send("Dialog Data Time Range : " + session.dialogData.timeRange);
-        if(!session.dialogData.timeRange)
-        {
-          builder.Prompts.choice(session, "Please select the time range", ["yesterday", "this week","last week","last month"]);
+        // }
+        
+        // if(args.response)
+        // {
+        //   var location = session.dialogData.location = args.response.entity;
+        // }
+        // // session.send("Dialog Data Time Range : " + session.dialogData.timeRange);
+        // if(!session.dialogData.timeRange)
+        // {
+        //   builder.Prompts.choice(session, "Please select the time range", ["yesterday", "this week","last week","last month"]);
           
-        }
+        // }
 
+        // if(args.response)
+        // {
+        //   session.dialogData.timeRange = args.response.entity;
+        // }
+        
+        // if(!session.dialogData.product)
+        // {
+        //   builder.Prompts.text(session, "Please select a product");
+          
+        // }
+        // next();
     },
     function (session,results,next) {
         
@@ -92,18 +106,24 @@ dialog.matches('WhatToSell', [
         {
           var location = session.dialogData.location = results.response.entity;
         }
-        session.send("Dialog Data Time Range : " + session.dialogData.timeRange);
+        // session.send("session time range" + session.dialogData.timeRange );
+        // session.send("! session time range" + (!session.dialogData.timeRange) );
         if(!session.dialogData.timeRange)
         {
           builder.Prompts.choice(session, "Please select the time range", ["yesterday", "this week","last week","last month"]);
-          
         }
+        else{
+            next();
+        }
+        
+     
         
     },
     function (session,results,next) {
         
        if(results.response)
         {
+          console.log(results.response);
           session.dialogData.timeRange = results.response.entity;
         }
       
@@ -112,6 +132,11 @@ dialog.matches('WhatToSell', [
           builder.Prompts.text(session, "Please select a product");
           
         }
+        else
+        {
+            next();
+        }
+        // next();
     },
     function (session,results,next) {
         
@@ -119,7 +144,7 @@ dialog.matches('WhatToSell', [
         {
           session.dialogData.product = results.response;
         }
-      
+    next();
        
     },
     
@@ -129,7 +154,7 @@ dialog.matches('WhatToSell', [
         {
         session.send("You want to generate the What to Sell report for Product : " + session.dialogData.product + 
                      " Location : " + session.dialogData.location + 
-                     " Time Range : " + session.dialogData.timeRangee );
+                     " Time Range : " + session.dialogData.timeRange );
         }
     }
     
