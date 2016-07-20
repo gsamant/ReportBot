@@ -74,7 +74,17 @@ dialog.matches('WhatToSell', [
           builder.Prompts.choice(session, "Please select the location", ["Mumbai", "Pune","Maharashtra","India"]);
           
         }
-        
+        if(results.response)
+        {
+          var location = session.dialogData.location = results.response.entity;
+        }
+        session.send("Dialog Data Time Range : " + session.dialogData.timeRange);
+        if(!session.dialogData.timeRange)
+        {
+          builder.Prompts.choice(session, "Please select the time range", ["yesterday", "this week","last week","last month"]);
+          
+        }
+
     },
     function (session,results,next) {
         
