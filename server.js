@@ -44,19 +44,29 @@ dialog.matches('Greeting', [
 dialog.matches('WhatToSell', [
    
     function (session,args,next) {
-        console.log("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'Product').entity);
-        session.send("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'Product').entity);
-         session.send("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'Location').entity);
-         session.send("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'TimeRange').entity);
+        // console.log("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'Product').entity);
+        // session.send("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'Product').entity);
+        //  session.send("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'Location').entity);
+        //  session.send("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'TimeRange').entity);
          
         session.send("You want to find what you can sell :");
-       var location = session.dialogData.location = builder.EntityRecognizer.findEntity(args.entities, 'Location').entity;
-        var timeRange = session.dialogData.timeRange = builder.EntityRecognizer.findEntity(args.entities, 'TimeRange').entity;
-       var product =  session.dialogData.product = builder.EntityRecognizer.findEntity(args.entities, 'Product').entity;
-       session.send("Builder location : " + location);
-       session.send("Builder timerange : " + timeRange);
-       session.send("Builder product: " + product);
-        if(!location)
+        if(builder.EntityRecognizer.findEntity(args.entities, 'Location').entity)
+        {
+       session.dialogData.location = builder.EntityRecognizer.findEntity(args.entities, 'Location').entity;
+        }
+        if(builder.EntityRecognizer.findEntity(args.entities, 'TimeRange').entity)
+        {
+       session.dialogData.timeRange = builder.EntityRecognizer.findEntity(args.entities, 'TimeRange').entity;
+        }
+        if(builder.EntityRecognizer.findEntity(args.entities, 'Product').entity)
+        {
+       session.dialogData.product = builder.EntityRecognizer.findEntity(args.entities, 'Product').entity;
+        }
+    
+    //    session.send("Builder location : " + location);
+    //    session.send("Builder timerange : " + timeRange);
+    //    session.send("Builder product: " + product);
+        if(!session.dialogData.location)
         {
           builder.Prompts.choice(session, "Please select the location", ["Mumbai", "Pune","Maharashtra","India"]);
           
