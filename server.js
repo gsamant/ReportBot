@@ -82,6 +82,7 @@ dialog.matches('WhatToSell', [
         {
           var location = session.dialogData.location = results.response.entity;
         }
+        session.send("Dialog Data Time Range : " + session.dialogData.timeRange);
         if(!session.dialogData.timeRange)
         {
           builder.Prompts.choice(session, "Please select the time range", ["yesterday", "this week","last week","last month"]);
