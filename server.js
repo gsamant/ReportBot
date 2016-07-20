@@ -47,10 +47,10 @@ dialog.matches('WhatToSell', [
         console.log("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'Product').entity);
         session.send("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'Product').entity);
         session.send("You want to find what you can sell :");
-        session.userData.location = builder.EntityRecognizer.findEntity(args.entities, 'Location').entity;
-        session.userData.timeRange = builder.EntityRecognizer.findEntity(args.entities, 'Time Range').entity;
-        session.userData.product = builder.EntityRecognizer.findEntity(args.entities, 'Product').entity;
-        if(!session.userData.location)
+        session.dialogData.location = builder.EntityRecognizer.findEntity(args.entities, 'Location').entity;
+        session.dialogData.timeRange = builder.EntityRecognizer.findEntity(args.entities, 'Time Range').entity;
+        session.dialogData.product = builder.EntityRecognizer.findEntity(args.entities, 'Product').entity;
+        if(!session.dialogData.location)
         {
           builder.Prompts.choice(session, "Please select the location", ["Mumbai", "Pune","Maharashtra","India"]);
           
@@ -61,9 +61,9 @@ dialog.matches('WhatToSell', [
         
         if(results.response)
         {
-          session.userData.location = results.response.entity;
+          session.dialogData.location = results.response.entity;
         }
-        if(!session.userData.timeRange)
+        if(!session.dialogData.timeRange)
         {
           builder.Prompts.choice(session, "Please select the time range", ["yesterday", "this week","last week","last month"]);
           
@@ -74,10 +74,10 @@ dialog.matches('WhatToSell', [
         
        if(results.response)
         {
-          session.userData.timeRange = results.response.entity;
+          session.dialogData.timeRange = results.response.entity;
         }
       
-        if(!session.userData.product)
+        if(!session.dialogData.product)
         {
           builder.Prompts.text(session, "Please select a product");
           
@@ -87,7 +87,7 @@ dialog.matches('WhatToSell', [
         
        if(results.response)
         {
-          session.userData.product = results.response;
+          session.dialogData.product = results.response;
         }
       
        
@@ -95,11 +95,11 @@ dialog.matches('WhatToSell', [
     
     function (session, results) {
 
-        if(session.userData.location && session.userData.timeRange && session.userData.product)
+        if(session.dialogData.location && session.dialogData.timeRange && session.dialogData.product)
         {
-        session.send("You want to generate the What to Sell report for Product : " + session.userData.product + 
-                     " Location : " + session.userData.location + 
-                     " Time Range : " + session.userData.timeRangee );
+        session.send("You want to generate the What to Sell report for Product : " + session.dialogData.product + 
+                     " Location : " + session.dialogData.location + 
+                     " Time Range : " + session.dialogData.timeRangee );
         }
     }
     
