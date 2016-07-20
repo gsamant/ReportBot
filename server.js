@@ -52,24 +52,54 @@ dialog.matches('WhatToSell', [
         if(!session.userData.location)
         {
           builder.Prompts.choice(session, "Please select the location", ["Mumbai", "Pune","Maharashtra","India"]);
+          
+        }
+        
+    },
+    function (session,results,next) {
+        
+        if(results.response)
+        {
           session.userData.location = results.response.entity;
         }
         if(!session.userData.timeRange)
         {
           builder.Prompts.choice(session, "Please select the time range", ["yesterday", "this week","last week","last month"]);
+          
+        }
+        
+    },
+    function (session,results,next) {
+        
+       if(results.response)
+        {
           session.userData.timeRange = results.response.entity;
         }
+      
         if(!session.userData.product)
         {
-          builder.Prompts.text(session, "Please select the time range");
-          session.userData.product = results.response;
+          builder.Prompts.text(session, "Please select a product");
+          
         }
     },
+    function (session,results,next) {
+        
+       if(results.response)
+        {
+          session.userData.product = results.response;
+        }
+      
+       
+    },
+    
     function (session, results) {
+
         if(session.userData.location && session.userData.timeRange && session.userData.product)
+        {
         session.send("You want to generate the What to Sell report for Product : " + session.userData.product + 
                      " Location : " + session.userData.location + 
                      " Time Range : " + session.userData.timeRangee );
+        }
     }
     
 ]);
