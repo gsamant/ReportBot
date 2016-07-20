@@ -47,10 +47,13 @@ dialog.matches('WhatToSell', [
         console.log("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'Product').entity);
         session.send("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'Product').entity);
         session.send("You want to find what you can sell :");
-        session.dialogData.location = builder.EntityRecognizer.findEntity(args.entities, 'Location').entity;
-        session.dialogData.timeRange = builder.EntityRecognizer.findEntity(args.entities, 'Time Range').entity;
-        session.dialogData.product = builder.EntityRecognizer.findEntity(args.entities, 'Product').entity;
-        if(!session.dialogData.location)
+       var location = session.dialogData.location = builder.EntityRecognizer.findEntity(args.entities, 'Location').entity;
+        var timeRange = session.dialogData.timeRange = builder.EntityRecognizer.findEntity(args.entities, 'Time Range').entity;
+       var product =  session.dialogData.product = builder.EntityRecognizer.findEntity(args.entities, 'Product').entity;
+       session.send("Builder location : " + location);
+       session.send("Builder timerange : " + timeRange);
+       session.send("Builder product: " + product);
+        if(!location)
         {
           builder.Prompts.choice(session, "Please select the location", ["Mumbai", "Pune","Maharashtra","India"]);
           
@@ -61,7 +64,7 @@ dialog.matches('WhatToSell', [
         
         if(results.response)
         {
-          session.dialogData.location = results.response.entity;
+          var location = session.dialogData.location = results.response.entity;
         }
         if(!session.dialogData.timeRange)
         {
