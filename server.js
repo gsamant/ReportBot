@@ -1,5 +1,6 @@
 var restify = require('restify');
 var builder = require('botbuilder');
+// var request = require('request');
 
 
 var connector = new builder.ChatConnector({
@@ -118,3 +119,24 @@ dialog.matches('WhatToSell', [
 
 
 dialog.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."));
+
+// dialog.onDefault([
+// function(session, args, next) {
+//     request({
+//         uri : "https://www.bing.com",
+//         method : "GET",
+//         json : true,
+//     }, function(error, response, jbody){
+//         if(error) {
+//             console.log(error);
+//         }
+//         next();
+//     })
+// },
+//  function (session) {
+
+       
+//             session.send("Next Function executed " );
+//         }
+    
+// ]);
