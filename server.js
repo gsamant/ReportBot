@@ -48,7 +48,9 @@ dialog.matches('WhatToSell', [
         // session.send("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'Product').entity);
         //  session.send("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'Location').entity);
         //  session.send("Builder Entities : " + builder.EntityRecognizer.findEntity(args.entities, 'TimeRange').entity);
-         
+        session.dialogData.location = "";
+        session.dialogData.product = "";
+        session.dialogData.timeRange = "";
         session.send("You want to find what you can sell :");
         if(builder.EntityRecognizer.findEntity(args.entities, 'Location'))
         {
